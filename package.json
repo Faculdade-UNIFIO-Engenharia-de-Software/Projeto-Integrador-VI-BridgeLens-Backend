@@ -1,0 +1,36 @@
+{
+  "name": "Projeto-Integrador-VI-BridgeLens-Backend",
+  "version": "1.0.0",
+  "description": "Projeto Integrador do VI-A Termo de Engenharia de Software UNIFIO",
+  "main": "server.js",
+  "scripts": {
+    "dev": "tsx watch --env-file=.env src/server.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Arthur Magalhães, Clara Martim, Herbert Sousa, Lucas Adriano, Matheus Gabriel e Thais Zimmer",
+  "license": "ISC",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.4.1",
+      "onFail": "download"
+    }
+  },
+  "packageManager": "pnpm@12.4.1",
+  "type": "module",
+  "dependencies": {
+    "@prisma/client": "^7",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "zod": "^4.6.2"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^20.14.12",
+    "dotenv": "^17.4.2",
+    "prisma": "^7",
+    "tsx": "^4.23.13",
+    "typescript": "^7.0.2"
+  }
+}

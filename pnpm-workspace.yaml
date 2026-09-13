@@ -1,0 +1,4 @@
+allowBuilds:
+  '@prisma/engines': false
+  esbuild@0.28.2: true
+  prisma: false

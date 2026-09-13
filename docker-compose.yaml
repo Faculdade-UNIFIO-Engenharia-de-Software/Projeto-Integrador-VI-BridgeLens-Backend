@@ -1,0 +1,22 @@
+services:
+  postgres:
+    image: postgres:14.23-alpine3.24
+    container_name: bridge-lens-postgres
+    ports:
+      - "${PORT_DB_HOST: -5432}:${PG_CONTAINER_PORT}"
+    environment:
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_PASSWORD: ${PG_PASSWORD}
+      POSTGRES_DB: ${PG_DB_NAME}
+    networks:
+      - bridgeLens-nt
+    volumes:
+      - pg-data-bl:/var/lib/postgresql/data
+
+volumes:
+  pg-data-bl:
+networks:
+  bridgeLens-nt:
+    name: bridgeLens-nt
+
+    
