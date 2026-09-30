@@ -1,0 +1,67 @@
+Table users{
+  user_id uuid [ pk, default:`gen_random_uuid()`]
+  people_id uuid 
+  username text
+  email text [unique]
+  password text
+  created_at timestamp [default:`now()`]
+  updated_at timestamp [default:`now()`]
+  created_origin int
+}
+
+ref: users.people_id - peoples.people_id
+
+Table peoples{
+  people_id uuid [ pk, default:`gen_random_uuid()`]
+  first_name varchar(50)
+  remaining_name text
+  sex people_sex [default:"NONE"]
+  birth_date date
+  created_at timestamp [default:`now()`]
+  updated_at timestamp [default:`now()`]
+}
+
+Table people_contacts{
+  people_contact_id uuid [ pk, default:`gen_random_uuid()`]
+  people_id uuid [ref:>peoples.people_id]
+  email text
+  phone_with_ddd text
+  isCurrent bool
+  created_at timestamp [default:`now()`]
+
+}
+
+enum people_sex{
+  MALE
+  FEMALE
+  NON_BINARY
+  NONE
+}
+
+Table user_roles{
+  user_role_id uuid [pk, default:`gen_random_uuid()`]
+  role_id uuid
+  user_id uuid
+  created_by uuid
+  created_at timestamp [default:`now()`]
+  updated_at timestamp [default:`now()`]
+}
+
+Table roles {
+  role_id uuid [ pk, default:`gen_random_uuid()`]
+  role_type role_type
+  user_cannot text
+  user_can text
+  entity text
+  created_at timestamp [default:`now()`]
+  updated_at timestamp [default:`now()`]
+}
+
+ENUM role_type{
+  ABAC
+  RBAC
+}
+
+ref: user_roles.created_by < users.user_id
+ref: user_roles.role_id < roles.role_id
+ref: user_roles.user_id < users.user_id
