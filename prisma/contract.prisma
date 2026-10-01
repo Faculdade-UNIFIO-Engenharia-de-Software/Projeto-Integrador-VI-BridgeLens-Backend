@@ -1,8 +1,122 @@
 // use prisma-8
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
-  phone String?
+  userId Uuid  @id @default(uuid()) @map("user_id")
+  people_id People?
+  username String
+  email String @unique
+  passwordHash String @map("password_hash")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt temporal.updatedAt()  @map("updated_at")
+  createdOrigin Int @map("created_origin")
+
+  owns_account Account[]
+  tokens Token[]
+  roles UserRole[]
+
+  @@map("users")
+}
+
+model Account{
+  accountId Uuid @map("account_id")
+  provider AccountProvider
+  providerAccountId String @map("provider_account_id")
+  userId Uuid @map("user_id")
+  
+  user User @relation(fields:[userId], references:[userId])
+  
+  @@map("accounts")
+}
+
+enum AccountProvider{
+  GOOGLE
+  GITHUB
+}
+
+model Token{
+  tokenId Uuid @id @default(uuid())  @map("token_id")
+  type TokenType
+  createdAt DateTime @default(now()) @map("created_at")
+  userId Uuid @map("user_id")
+  
+  user User @relation(fields:[userId], references:[userId])
+
+  @@map("tokens")
+}
+
+enum TokenType{
+  PASSWORD_RECOVER
+}
+
+model People{
+  peopleId Uuid  @id @default(uuid()) @map("people_id")
+  userId Uuid @unique @map("user_id")
+  firstName String
+  remainingName String
+  sex PeopleSex
+  birthDate Date
+  
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt temporal.updatedAt()  @map("updated_at")
+
+  user User @relation(fields:[userId], references:[userId])
+  peopleContact PeopleContact[]
+
+  @@map("peoples")
+}
+
+enum PeopleSex{
+  MALE
+  FEMALE
+  NON_BINARY
+  NONE
+}
+
+model PeopleContact{
+  peopleContactId String @id @default(uuid()) @map("people_contact_id")
+  peopleId Uuid
+  email String
+  phoneWithDDD String @map("phone_with_ddd")
+  isCurrent Boolean @map("is_current")
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  people People  @relation(fields:[peopleId], references:[peopleId])
+
+  @@map("people_contacts")
+}
+
+model UserRole{
+  userRoleId Uuid @id @default(uuid()) @map("user_role_id")
+  roleId Uuid @map("role_id")
+  userId Uuid @map("user_id")
+  createdBy Uuid @map("created_by")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt temporal.updatedAt() @map("updated_at")
+
+  user User @relation(fields:[userId],references:[userId])
+  roles Role @relation(fields:[roleId],references:[roleId])
+
+  @@map("user_roles")
+}
+
+model Role{
+  roleId Uuid @id @default(uuid()) @map("role_id")
+  roleType RoleType @map("role_type")
+  userCannot String
+  userCan String
+  entity String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt temporal.updatedAt() @map("updated_at")
+
+  userRoles UserRole[]
+
+
+
+  @@map("roles")
+}
+
+enum RoleType{
+  ABAC
+  RBAC
 }

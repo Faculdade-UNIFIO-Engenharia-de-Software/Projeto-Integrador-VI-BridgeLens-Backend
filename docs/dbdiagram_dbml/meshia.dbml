@@ -11,6 +11,33 @@ Table users{
 
 ref: users.people_id - peoples.people_id
 
+Table accounts{
+  account_id uuid
+  provider account_providers
+  provider_account_id text
+  user_id uuid
+}
+
+ref: users.user_id > accounts.user_id
+
+enum account_providers{
+  GITHUB
+  GOOGLE
+}
+
+Table tokens{
+  token_id uuid
+  type token_types
+  created_at datetime [default:`now()`]
+  user_id uuid
+}
+
+ref: tokens.user_id > users.user_id
+
+enum token_types{
+  PASSWORD_RECOVER
+}
+
 Table peoples{
   people_id uuid [ pk, default:`gen_random_uuid()`]
   first_name varchar(50)

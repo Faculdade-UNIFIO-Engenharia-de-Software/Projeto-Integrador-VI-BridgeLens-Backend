@@ -6,15 +6,7 @@ import {hash} from "bcrypt"
 class UserController  {
   async index(request: Request, response: Response, next: NextFunction){
     try {
-      const user = {
-        "user_name":"lucassantos",
-        "complete_name":"Lucas Adriano dos Santos",
-        "email":"lucas@email.com",
-        "password":"xxxxxxxxxxxxxx",
-      }
-      // const users = await prisma.user.findMany()
-
-      return response.json(user)
+      
     }
     catch (error) {
       next(error)
@@ -59,7 +51,7 @@ class UserController  {
     })
 
     response.status(201).json()
-   }
+  }
   async update(request: Request, response: Response, next: NextFunction) {
     try {
       

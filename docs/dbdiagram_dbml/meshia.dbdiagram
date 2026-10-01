@@ -36,6 +36,18 @@
         "schemaName": "public",
         "x": 272.9467455621299,
         "y": -192.28994082840242
+      },
+      {
+        "name": "accounts",
+        "schemaName": "public",
+        "x": -346.6362191008129,
+        "y": 12
+      },
+      {
+        "name": "tokens",
+        "schemaName": "public",
+        "x": -315.4655648039379,
+        "y": 218.73293458246332
       }
     ],
     "tableGroupCollapseStates": [],
@@ -129,6 +141,36 @@
         "secondTableName": "users",
         "secondSchemaName": "public",
         "secondRelation": "*",
+        "checkPoints": []
+      },
+      {
+        "firstFieldNames": [
+          "user_id"
+        ],
+        "firstTableName": "users",
+        "firstSchemaName": "public",
+        "firstRelation": "*",
+        "secondFieldNames": [
+          "user_id"
+        ],
+        "secondTableName": "accounts",
+        "secondSchemaName": "public",
+        "secondRelation": "1",
+        "checkPoints": []
+      },
+      {
+        "firstFieldNames": [
+          "user_id"
+        ],
+        "firstTableName": "tokens",
+        "firstSchemaName": "public",
+        "firstRelation": "*",
+        "secondFieldNames": [
+          "user_id"
+        ],
+        "secondTableName": "users",
+        "secondSchemaName": "public",
+        "secondRelation": "1",
         "checkPoints": []
       }
     ]
