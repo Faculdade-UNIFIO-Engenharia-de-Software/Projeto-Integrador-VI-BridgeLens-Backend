@@ -2,6 +2,7 @@ services:
   postgres:
     image: postgres:14.23-alpine3.24
     container_name: meshAIPostgres
+    restart: always
     ports:
       - "${PORT_DB_HOST:-5432}:${PG_CONTAINER_PORT:-5432}"
     environment:

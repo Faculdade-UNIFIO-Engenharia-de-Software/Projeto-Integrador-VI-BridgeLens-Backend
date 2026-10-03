@@ -565,6 +565,13 @@
           },
           "User": {
             "fields": {
+              "completeName": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
               "createdAt": {
                 "nullable": false,
                 "type": {
@@ -608,7 +615,7 @@
                 }
               },
               "username": {
-                "nullable": false,
+                "nullable": true,
                 "type": {
                   "codecId": "pg/text@1",
                   "kind": "scalar"
@@ -680,6 +687,9 @@
             },
             "storage": {
               "fields": {
+                "completeName": {
+                  "column": "complete_name"
+                },
                 "createdAt": {
                   "column": "created_at"
                 },
@@ -1286,6 +1296,11 @@
             },
             "users": {
               "columns": {
+                "complete_name": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                },
                 "created_at": {
                   "codecId": "pg/timestamptz-temporal@1",
                   "default": {
@@ -1323,7 +1338,7 @@
                 "username": {
                   "codecId": "pg/text@1",
                   "nativeType": "text",
-                  "nullable": false
+                  "nullable": true
                 }
               },
               "foreignKeys": [],
@@ -1378,7 +1393,7 @@
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "c0dae822c48125bfa53e7583304b96c725727a0609bab776d2d8de75d9168dd3"
+    "storageHash": "3d0a007fcbda6d84cc6c8e70e617618ae080af0df27834020f8d0219b1f2f4c4"
   },
   "execution": {
     "executionHash": "edb13a3f21b231261476ebc8ba66e746ac577a720b7cfa0e34f90e28376b61c2",

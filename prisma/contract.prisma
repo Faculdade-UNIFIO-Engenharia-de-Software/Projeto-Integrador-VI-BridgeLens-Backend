@@ -3,7 +3,8 @@
 model User {
   userId Uuid  @id @default(uuid()) @map("user_id")
   people_id People?
-  username String
+  username String?
+  completeName String @map("complete_name")
   email String @unique
   passwordHash String @map("password_hash")
   createdAt DateTime @default(now()) @map("created_at")
